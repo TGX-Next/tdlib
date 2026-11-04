@@ -6,6 +6,11 @@ This bundle **is not intended** to be used in any projects except **Telegram X**
 
 If you wish to use TDLib in your Android project, refer to [Using in Java projects](https://github.com/tdlib/td#using-java) section.
 
+## Supported platform
+
+The TGX-Next bundle includes only Android 13+ (API 33+) and `arm64-v8a`.
+TDLib and OpenSSL build/install scripts use the same target.
+
 ## License
 
 `TDLib` is licensed under the terms of the Boost Software License.

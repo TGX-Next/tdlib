@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
+# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 ANDROID_SDK_ROOT=${1:-SDK}
-ANDROID_NDK_VERSION=${2:-23.2.8568313}
+ANDROID_NDK_VERSION=${2:-30.0.16248370}
 OPENSSL_INSTALL_DIR=${3:-third-party/openssl}
 ANDROID_STL=${4:-c++_static}
 TDLIB_INTERFACE=${5:-Java}
-ANDROID_API_LEVEL=${6:-16}
-ABIS=${7:-"arm64-v8a armeabi-v7a x86_64 x86"}
+ANDROID_API_LEVEL=${6:-33}
+ABIS=${7:-"arm64-v8a"}
 ANDROID_SDK_PACKAGE=${8:-android-37.2}
+
+if [ "$ANDROID_API_LEVEL" -lt 33 ] || [ "$ABIS" != "arm64-v8a" ]; then
+  echo "Only Android 13+ (API 33+) and arm64-v8a are supported" >&2
+  exit 1
+fi
 
 if [ "$ANDROID_STL" != "c++_static" ] && [ "$ANDROID_STL" != "c++_shared" ] ; then
   echo 'Error: ANDROID_STL must be either "c++_static" or "c++_shared".'
@@ -119,3 +125,4 @@ jar -cMf tdlib.zip tdlib || exit 1
 mv tdlib.zip tdlib-debug.zip tdlib || exit 1
 
 echo "Done."
+# endregion

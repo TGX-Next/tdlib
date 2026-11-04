@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 TDLIB_SOURCE_DIR=${1:-td}
@@ -6,7 +7,7 @@ TDLIB_INSTALL_DIR=${2:-build/td}
 OPENSSL_INSTALL_DIR=${3:-build/openssl}
 ANDROID_SDK_PACKAGE=${4:-android-37.2}
 TDLIB_BUILD_SCRIPT="$(pwd)/build-tdlib-impl.sh"
-TGX_FLAVORS=${5:-"latest qrs nop marshmallow lollipop legacy"}
+TGX_FLAVORS=${5:-"latest"}
 
 source "$(pwd)/setup.sh" --light
 
@@ -50,38 +51,13 @@ TDLIB_COMMIT="$(git rev-parse HEAD)"
 popd > /dev/null || exit 1
 
 for TGX_FLAVOR in $TGX_FLAVORS; do
-  if [ "${TGX_FLAVOR}" != "legacy" ]; then
-    ANDROID_NDK_VERSION="$ANDROID_NDK_VERSION_PRIMARY"
-    ABIS="arm64-v8a armeabi-v7a x86_64 x86"
-  else
-    ANDROID_NDK_VERSION="$ANDROID_NDK_VERSION_LEGACY"
-    ABIS="armeabi-v7a x86"
+  if [ "$TGX_FLAVOR" != "latest" ]; then
+    echo "Only the latest flavor (Android 13+) is supported: $TGX_FLAVOR" >&2
+    exit 1
   fi
-
-  case "${TGX_FLAVOR}" in
-    latest)
-      ANDROID_API_LEVEL=33
-      ;;
-    qrs)
-      ANDROID_API_LEVEL=29
-      ;;
-    nop)
-      ANDROID_API_LEVEL=24
-      ;;
-    marshmallow)
-      ANDROID_API_LEVEL=23
-      ;;
-    lollipop)
-      ANDROID_API_LEVEL=21
-      ;;
-    legacy)
-      ANDROID_API_LEVEL=16
-      ;;
-    *)
-      echo -e "${STYLE_ERROR}Unsupported flavor: ${TGX_FLAVOR}.${STYLE_END}"
-      exit 1
-      ;;
-  esac
+  ANDROID_NDK_VERSION="$ANDROID_NDK_VERSION_PRIMARY"
+  ANDROID_API_LEVEL=33
+  ABIS="arm64-v8a"
 
   echo "Start build TDLib, flavor: $TGX_FLAVOR ndk: $ANDROID_NDK_VERSION, abi: $ABIS, api: $ANDROID_API_LEVEL"
 
@@ -104,3 +80,4 @@ done
 echo "$TDLIB_COMMIT" > "$TDLIB_INSTALL_DIR/version.txt"
 
 echo "Built TDLib: $TDLIB_INSTALL_DIR, commit: $TDLIB_COMMIT"
+# endregion
