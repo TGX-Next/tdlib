@@ -1,5 +1,4 @@
 #!/bin/bash
-# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 SYMBOLS_INSTALL_DIR=${1:-build}
@@ -94,4 +93,3 @@ cp "$TDLIB_INSTALL_DIR/version.txt" .
 popd > /dev/null
 
 echo "Done! OpenSSL: $(cat "$OPENSSL_INSTALL_DIR/version.txt") TDLib: $(cat "$TDLIB_INSTALL_DIR/version.txt")"
-# endregion

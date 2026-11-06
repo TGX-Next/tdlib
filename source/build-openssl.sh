@@ -1,5 +1,4 @@
 #!/bin/bash
-# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 OPENSSL_SOURCE_DIR=${1:-openssl}
@@ -130,4 +129,3 @@ echo "$OPENSSL_COMMIT" > "$OPENSSL_INSTALL_DIR/version.txt"
 popd > /dev/null
 
 echo "Build OpenSSL: $OPENSSL_INSTALL_DIR, commit: $OPENSSL_COMMIT"
-# endregion

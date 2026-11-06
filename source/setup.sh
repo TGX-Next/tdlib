@@ -1,5 +1,4 @@
 #!/bin/bash
-# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 MODE=${1:---full}
@@ -19,4 +18,3 @@ else
 fi
 
 popd > /dev/null
-# endregion

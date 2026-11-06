@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 ANDROID_SDK_ROOT=${1:-SDK}
@@ -125,4 +124,3 @@ jar -cMf tdlib.zip tdlib || exit 1
 mv tdlib.zip tdlib-debug.zip tdlib || exit 1
 
 echo "Done."
-# endregion

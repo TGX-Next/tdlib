@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# region @MadeByLLM("gpt-6", id = "android13-arm64")
 set -e
 
 TDLIB_SOURCE_DIR=${1:-td}
@@ -80,4 +79,3 @@ done
 echo "$TDLIB_COMMIT" > "$TDLIB_INSTALL_DIR/version.txt"
 
 echo "Built TDLib: $TDLIB_INSTALL_DIR, commit: $TDLIB_COMMIT"
-# endregion

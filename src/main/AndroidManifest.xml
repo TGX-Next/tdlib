@@ -5,11 +5,9 @@
   ~ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
   -->
 
-<!-- region @MadeByLLM("gpt-6", id = "android13-arm64") -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application />
 
 </manifest>
-<!-- endregion -->
